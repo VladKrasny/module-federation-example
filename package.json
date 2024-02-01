@@ -1,0 +1,12 @@
+{
+  "name": "module-federation-example",
+  "private": true,
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "host": "pnpm --filter @mfe/host",
+    "remote": "pnpm --filter @mfe/remote",
+    "shared-ui": "pnpm --filter @mfe/shared-ui",
+    "dev": "pnpm --recursive --parallel --stream run dev"
+  }
+}
