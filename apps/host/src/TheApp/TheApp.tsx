@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, Suspense, lazy } from "react";
 import { TheButton } from "@mfe/shared-ui";
-import TheRemoteApp from "remoteApp/TheApp";
+import { ErrorBoundary } from "react-error-boundary";
+
+const TheRemoteApp = lazy(() => import("remoteApp/TheApp"));
 
 export function TheApp() {
   const [count, setCount] = useState(0);
@@ -15,7 +17,11 @@ export function TheApp() {
 
       <TheButton onClick={increment}>Host count is {count}</TheButton>
 
-      <TheRemoteApp />
+      <ErrorBoundary fallback={<div>Something went wrong</div>}>
+        <Suspense fallback={<div>Loading Remote App...</div>}>
+          <TheRemoteApp />
+        </Suspense>
+      </ErrorBoundary>
     </>
   );
 }
